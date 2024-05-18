@@ -17,21 +17,21 @@ while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
 esac; shift; done
 if [[ "$1" == '--' ]]; then shift; fi
 
-repository=${repository:-"sigwindowstools"}
+repository=${repository:-"gimlichael"}
 
 docker buildx create --name img-builder --use --platform windows/amd64
 trap 'docker buildx rm img-builder' EXIT
 
 if [[ -n "$flannelVersion" || "$all" == "1" ]] ; then
   # set default
-  flannelVersion=${flannelVersion:-"v0.21.5"}
+  flannelVersion=${flannelVersion:-"v0.25.1"}
   pushd flanneld
   docker buildx build --provenance=false --sbom=false --platform windows/amd64 --output=type=registry --pull --build-arg=flannelVersion=$flannelVersion -f Dockerfile -t $repository/flannel:$flannelVersion-hostprocess .
   popd
 fi 
 
 if [[ -n "$proxyVersion" || "$all" == "1" ]] ; then
-  proxyVersion=${proxyVersion:-"v1.22.4"}
+  proxyVersion=${proxyVersion:-"v1.29.3"}
   pushd kube-proxy
   docker buildx build --provenance=false --sbom=false --platform windows/amd64 --output=type=registry --pull --build-arg=k8sVersion=$proxyVersion -f Dockerfile -t $repository/kube-proxy:$proxyVersion-flannel-hostprocess .
   popd
