@@ -24,14 +24,14 @@ trap 'docker buildx rm img-builder' EXIT
 
 if [[ -n "$flannelVersion" || "$all" == "1" ]] ; then
   # set default
-  flannelVersion=${flannelVersion:-"v0.25.2"}
+  flannelVersion=${flannelVersion:-"v0.25.7"}
   pushd flanneld
   docker buildx build --provenance=false --sbom=false --platform windows/amd64 --output=type=registry --pull --build-arg=flannelVersion=$flannelVersion -f Dockerfile -t $repository/flannel:$flannelVersion-hostprocess .
   popd
 fi 
 
 if [[ -n "$proxyVersion" || "$all" == "1" ]] ; then
-  proxyVersion=${proxyVersion:-"v1.30.1"}
+  proxyVersion=${proxyVersion:-"v1.31.8"}
   pushd kube-proxy
   docker buildx build --provenance=false --sbom=false --platform windows/amd64 --output=type=registry --pull --build-arg=k8sVersion=$proxyVersion -f Dockerfile -t $repository/kube-proxy:$proxyVersion-flannel-hostprocess .
   popd
