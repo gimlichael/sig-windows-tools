@@ -19,7 +19,7 @@ function GetSourceVip($NetworkName)
         $subnet = $hnsNetwork.Subnets[0].AddressPrefix
 
         $ipamConfig = @"
-        {"cniVersion": "0.3.0", "name": "$NetworkName", "ipam":{"type":"host-local","ranges":[[{"subnet":"$subnet"}]],"dataDir":"/var/lib/cni/networks"}}
+        {"cniVersion": "0.3.1", "name": "$NetworkName", "ipam":{"type":"host-local","ranges":[[{"subnet":"$subnet"}]],"dataDir":"/var/lib/cni/networks"}}
 "@
 
         Write-Host "ipam sourcevip request: $ipamConfig"
