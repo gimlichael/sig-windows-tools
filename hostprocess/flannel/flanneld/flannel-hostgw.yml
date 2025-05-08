@@ -35,7 +35,7 @@ data:
               "Type": "SDNROUTE",
               "Settings": {
                 "DestinationPrefix": "",
-                "NeedEncap": false  # No encapsulation for Host-GW
+                "NeedEncap": false
               }
             }
           }
