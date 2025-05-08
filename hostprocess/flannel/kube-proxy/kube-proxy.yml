@@ -28,7 +28,7 @@ spec:
         # kube-proxy will use this value to select the correct network
         # https://github.com/kubernetes/kubernetes/blob/b0bc8adbc2178e15872f9ef040355c51c45d04bb/pkg/proxy/winkernel/proxier.go#L155-L158
         - name: KUBE_NETWORK
-          value: "flannel.4096"
+          value: "cbr0"
         - name: CNI_BIN_PATH
           value: C:\\opt\\cni\\bin
         - name: NODE_NAME
