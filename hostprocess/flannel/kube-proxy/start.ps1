@@ -19,7 +19,7 @@ function GetSourceVip($NetworkName)
         $subnet = $hnsNetwork.Subnets[0].AddressPrefix
 
         $ipamConfig = @"
-        {"cniVersion": "0.3.1", "name": "$NetworkName", "ipam":{"type":"host-local","ranges":[[{"subnet":"$subnet"}]],"dataDir":"/var/lib/cni/networks"}}
+        {"cniVersion": "0.3.0", "name": "$NetworkName", "ipam":{"type":"host-local","ranges":[[{"subnet":"$subnet"}]],"dataDir":"/var/lib/cni/networks"}}
 "@
 
         Write-Host "ipam sourcevip request: $ipamConfig"
@@ -56,6 +56,7 @@ mkdir -force /var/lib/kube-proxy/
 cp $env:CONTAINER_SANDBOX_MOUNT_POINT/mounts/var/lib/kube-proxy/kubeconfig-win.conf /var/lib/kube-proxy/kubeconfig.conf
 
 Write-Host "Finding sourcevip"
+Write-Host "NetworkName: $env:KUBE_NETWORK"
 $vip = GetSourceVip -NetworkName $env:KUBE_NETWORK
 Write-Host "sourceip: $vip"
 
@@ -64,6 +65,7 @@ $arguements = "--v=6",
         "--feature-gates=WinOverlay=true",
         "--proxy-mode=kernelspace",
         "--source-vip=$vip",
+        "--network-name=flannel.4096",
         "--kubeconfig=$env:CONTAINER_SANDBOX_MOUNT_POINT/mounts/var/lib/kube-proxy/kubeconfig-win.conf"
 
 $exe = "$env:CONTAINER_SANDBOX_MOUNT_POINT/kube-proxy/kube-proxy.exe " + ($arguements -join " ")
