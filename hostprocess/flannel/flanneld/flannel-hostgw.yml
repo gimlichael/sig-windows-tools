@@ -10,7 +10,7 @@ metadata:
 data:
   cni-conf-containerd.json: |
     {
-      "name": "cbr0",
+      "name": "flnael.4096",
       "cniVersion": "0.3.0",
       "type": "flannel",
       "capabilities": {
@@ -36,6 +36,15 @@ data:
               "Settings": {
                 "DestinationPrefix": "",
                 "NeedEncap": false
+              }
+            }
+          },
+          {
+            "Name":"EndpointPolicy",
+            "Value":{
+              "Type":"ProviderAddress",
+                "Settings":{
+                    "ProviderAddress":""
               }
             }
           }
