@@ -10,7 +10,7 @@ metadata:
 data:
   cni-conf-containerd.json: |
     {
-      "name": "cbr0",
+      "name": "flannel.4096",
       "cniVersion": "0.3.0",
       "type": "flannel",
       "capabilities": {
