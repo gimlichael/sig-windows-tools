@@ -8,7 +8,7 @@ metadata:
     tier: node
     app: flannel
 data:
-  cni-conf-containerd.json: |
+  cni-conf.json: |
     {
       "name": "flannel.4096",
       "cniVersion": "0.3.0",
@@ -18,7 +18,7 @@ data:
         "dns": true
       },
       "delegate": {
-        "type": "sdnoverlay",
+        "type": "win-overlay",
         "AdditionalArgs": [
           {
             "Name": "EndpointPolicy",
@@ -32,7 +32,7 @@ data:
           {
             "Name": "EndpointPolicy",
             "Value": {
-              "Type": "SDNROUTE",
+              "Type": "ROUTE",
               "Settings": {
                 "DestinationPrefix": "",
                 "NeedEncap": true
