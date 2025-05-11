@@ -8,7 +8,7 @@ metadata:
     tier: node
     app: flannel
 data:
-  cni-conf.json: |
+  cni-conf-containerd.json: |
     {
       "name": "flannel.4096",
       "cniVersion": "0.3.0",
