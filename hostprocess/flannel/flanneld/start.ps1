@@ -8,15 +8,15 @@ Copy-Item -Path "$env:CONTAINER_SANDBOX_MOUNT_POINT/cni/*" -Destination "$env:CN
 Write-Host "copy flannel config"
 mkdir -force C:\etc\kube-flannel\
 ls C:\etc\kube-flannel\
-ls $env:CONTAINER_SANDBOX_MOUNT_POINT/mounts/kube-flannel/
-cp -force $env:CONTAINER_SANDBOX_MOUNT_POINT/mounts/kube-flannel/net-conf.json  C:\etc\kube-flannel\net-conf.json
+ls $env:CONTAINER_SANDBOX_MOUNT_POINT/mounts/kube-flannel-windows/
+cp -force $env:CONTAINER_SANDBOX_MOUNT_POINT/mounts/kube-flannel-windows/net-conf.json  C:\etc\kube-flannel\net-conf.json
 
 # configure cni
 # get info
 Write-Host "update cni config"
 $cniJson = get-content $env:CONTAINER_SANDBOX_MOUNT_POINT/mounts/kube-flannel-windows/cni-conf-containerd.json | ConvertFrom-Json
 $serviceSubnet = $env:SERVICE_SUBNET
-$podSubnet = (get-content $env:CONTAINER_SANDBOX_MOUNT_POINT/mounts/kube-flannel/net-conf.json | ConvertFrom-Json).Network
+$podSubnet = (get-content $env:CONTAINER_SANDBOX_MOUNT_POINT/mounts/kube-flannel-windows/net-conf.json | ConvertFrom-Json).Network
 $na = Get-NetRoute | Where { $_.DestinationPrefix -eq '0.0.0.0/0' } | Select-Object -Property ifIndex
 $managementIP = (Get-NetIPAddress -ifIndex $na[0].ifIndex -AddressFamily IPv4).IPAddress
 

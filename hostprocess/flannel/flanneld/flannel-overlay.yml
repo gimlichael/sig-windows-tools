@@ -18,7 +18,7 @@ data:
         "dns": true
       },
       "delegate": {
-        "type": "win-overlay",
+        "type": "sdnoverlay",
         "AdditionalArgs": [
           {
             "Name": "EndpointPolicy",
@@ -32,7 +32,7 @@ data:
           {
             "Name": "EndpointPolicy",
             "Value": {
-              "Type": "ROUTE",
+              "Type": "SDNROUTE",
               "Settings": {
                 "DestinationPrefix": "",
                 "NeedEncap": true
