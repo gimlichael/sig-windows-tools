@@ -62,8 +62,10 @@ Write-Host "sourceip: $vip"
 
 $arguements = "--v=6",
         "--hostname-override=$env:NODE_NAME",
+        "--feature-gates=WinOverlay=true",
         "--proxy-mode=kernelspace",
         "--source-vip=$vip",
+        "--network-name=flannel.4096",
         "--kubeconfig=$env:CONTAINER_SANDBOX_MOUNT_POINT/mounts/var/lib/kube-proxy/kubeconfig-win.conf"
 
 $exe = "$env:CONTAINER_SANDBOX_MOUNT_POINT/kube-proxy/kube-proxy.exe " + ($arguements -join " ")

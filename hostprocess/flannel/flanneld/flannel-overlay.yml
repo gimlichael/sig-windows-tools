@@ -51,6 +51,16 @@ data:
         ]
       }
     }
+  net-conf.json: |
+    {
+      "Network": "10.244.0.0/16",
+      "EnableNFTables": false,
+      "Backend": {
+        "Type": "vxlan",
+        "VNI" : 4096,
+        "Port": 4789
+      }
+    }
 ---
 apiVersion: apps/v1
 kind: DaemonSet
